@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Job
+from .models import Job , Apply
 from django.core.paginator import Paginator
 
 
@@ -16,5 +16,23 @@ def job_list(request):
 
 def job_detial(request , slug):
     job = Job.objects.get(slug = slug)
+
+    if request.method =="POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        website = request.POST.get('website')
+        cover_letter = request.POST.get('cover_letter')
+        cv = request.FILES.get('cv')
+
+        Apply.objects.create(
+            job= job,
+            name=name,
+            email=email,
+            website=website,
+            cover_letter=cover_letter,
+            cv=cv
+        )
+
+
     context = {'job' : job}
     return render(request , 'job/job_detial.html' , context)
