@@ -45,3 +45,14 @@ class Job(models.Model):
 
 
 
+class Apply(models.Model):
+    job = models.ForeignKey(Job , on_delete=models.CASCADE)
+    name = models.CharField(max_length=25)
+    email = models.EmailField()
+    website = models.URLField()
+    cv = models.FileField(upload_to='apply')
+    cover_letter = models.TextField(max_length=500)
+    created_at = models.DateTimeField(auto_now= True)
+
+    def __str__ (self):
+        return self.name
