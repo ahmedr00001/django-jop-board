@@ -64,9 +64,9 @@ def add_job (request):
             slug = slugify(title),
         )
 
-        return redirect('jobs:job_list')
+        return redirect('job:job_list')
 
 
 
     context = {'job_type' : job_type}
-    return render(request , 'jobs/add_Job.html' , context)
+    return render(request , 'job/add_Job.html' , context)
