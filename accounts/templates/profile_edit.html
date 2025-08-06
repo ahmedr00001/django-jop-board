@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+
+    </div>
+</div>
+<!--/ bradcam_area  -->
+
+<div class="job_details_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="job_details_header">
+                    <div class="single_jobs white-bg d-flex justify-content-between">
+                        <div class="jobs_left d-flex align-items-center">
+                            <div class="thumb">
+                                <img src="img/svg_icon/1.svg" alt="">
+                            </div>
+                            <div class="jobs_conetent">
+                                <h4>Edit Profile</h4>
+                                <div class="links_locat d-flex align-items-center">
+                                    <div class="location">
+                                        <p> <i class="fa fa-plus"></i> Add Job Details</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="apply_job_form white-bg">
+                    <h4>Add New Job</h4>
+                    <form action="{% url 'job:add_job' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input_field">
+                                    <input type="text" name="title" placeholder="Job Title" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input_field">
+                                    <select name="jop_type" required>
+                                        <option value="">Select Job Type</option>
+                                        <option value="full Time">full Time</option>
+                                        <option value="Part time">Part time</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input_field">
+                                    <select name="category" required>
+                                        <option value="">Select Job Category</option>
+                                        {%for type in job_type%}
+                                        <option value="{{type}}">{{type}}</option>
+                                        {%endfor%}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input_field">
+                                    <input type="number" name="salary" placeholder="Salary (k/y)" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input_field">
+                                    <input type="number" name="vacancy" placeholder="Number of Vacancies" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input_field">
+                                    <textarea name="description" cols="30" rows="10" placeholder="Job Description"
+                                        required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input_field">
+                                    <label for="image">Upload Job Image</label>
+                                    <input type="file" name="image" id="image" accept="image/*" required>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input_field">
+                                    <input type="text" name="experience"
+                                        placeholder="Experience Level (e.g., 2-3 years)" required>
+                                </div>
+                            <div class="col-md-12">
+                                <div class="submit_btn">
+                                    <button class="boxed-btn3 w-100" type="submit">Add Job</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="job_sumary">
+                    <div class="summery_header">
+                        <h3>Job Posting Guidelines</h3>
+                    </div>
+                    <div class="job_content">
+                        <ul>
+                            <li><span>Provide clear and detailed job description</span></li>
+                            <li><span>Include specific requirements and qualifications</span></li>
+                            <li><span>Mention salary range and benefits</span></li>
+                            <li><span>Specify job type and location</span></li>
+                            <li><span>Add experience and education requirements</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="share_wrap d-flex">
+                    <span>Share this form:</span>
+                    <ul>
+                        <li><a href="#"> <i class="fa fa-facebook"></i></a> </li>
+                        <li><a href="#"> <i class="fa fa-google-plus"></i></a> </li>
+                        <li><a href="#"> <i class="fa fa-twitter"></i></a> </li>
+                        <li><a href="#"> <i class="fa fa-envelope"></i></a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
