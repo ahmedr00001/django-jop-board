@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from .models import Job , Apply , Category
 from django.core.paginator import Paginator
 from django.utils.text import slugify
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -38,6 +39,7 @@ def job_detial(request , slug):
     context = {'job' : job}
     return render(request , 'job/job_detial.html' , context)
 
+@login_required
 def add_job (request):
     job_type = Category.objects.all
 
