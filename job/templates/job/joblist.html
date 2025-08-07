@@ -1,9 +1,9 @@
 {%extends 'base.html'%}
-
+{%load bootstrap4%}
 {%block body%}
-    
+
 <body>
- 
+
     <!-- bradcam_area  -->
     <div class="bradcam_area bradcam_bg_1">
         <div class="container">
@@ -26,80 +26,14 @@
                     <div class="job_filter white-bg">
                         <div class="form_inner white-bg">
                             <h3>Filter</h3>
-                            <form action="#">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                            <input type="text" placeholder="Search keyword">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Location">Location</option>
-                                                <option value="1">Rangpur</option>
-                                                <option value="2">Dhaka </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Category">Category</option>
-                                                <option value="1">Category 1</option>
-                                                <option value="2">Category 2 </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Experience">Experience</option>
-                                                <option value="1">Experience 1</option>
-                                                <option value="2">Experience 2 </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Job type">Job type</option>
-                                                <option value="1">full time 1</option>
-                                                <option value="2">part time 2 </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Qualification">Qualification</option>
-                                                <option value="1">Qualification 1</option>
-                                                <option value="2">Qualification 2</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="single_field">
-                                            <select class="wide">
-                                                <option data-display="Gender">Gender</option>
-                                                <option value="1">male</option>
-                                                <option value="2">female</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                            <form action="#" method="GET">
+                                {% bootstrap_form myfilter.form%}
+                                <button class="boxed-btn3 w-100 mt-3" type="submit">Search</button>
+
                             </form>
                         </div>
-                        <div class="range_wrap">
-                            <label for="amount">Price range:</label>
-                            <div id="slider-range"></div>
-                            <p>
-                                <input type="text" id="amount" readonly style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
-                            </p>
-                        </div>
-                        <div class="reset_btn">
-                            <button  class="boxed-btn3 w-100" type="submit">Reset</button>
-                        </div>
+
+
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -110,7 +44,7 @@
                                     <h4>Job Listing</h4>
                                 </div>
                                 <div class="col-md-6">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -125,7 +59,9 @@
                                             <!-- <img src="{{job.image.url}}" alt=""> -->
                                         </div>
                                         <div class="jobs_conetent">
-                                            <a href="{% url 'jobs:job_detial' job.slug %}"><h4>{{job.title}}</h4></a>
+                                            <a href="{% url 'jobs:job_detial' job.slug %}">
+                                                <h4>{{job.title}}</h4>
+                                            </a>
                                             <!-- we write url as url then main url : app url then pass any parameter -->
                                             <div class="links_locat d-flex align-items-center">
                                                 <div class="location">
@@ -140,7 +76,8 @@
                                     <div class="jobs_right">
                                         <div class="apply_now">
                                             <a class="heart_mark" href="#"> <i class="fa fa-heart"></i> </a>
-                                            <a href="{% url 'jobs:job_detial' job.slug %}" class="boxed-btn3">Apply Now</a>
+                                            <a href="{% url 'jobs:job_detial' job.slug %}" class="boxed-btn3">Apply
+                                                Now</a>
                                         </div>
                                         <div class="date">
                                             <p>Date line: {{job.published_at|date:"d M Y" }}</p>
@@ -149,29 +86,37 @@
                                 </div>
                             </div>
                         </div>
-                        {%if jobs.has_other_pages%}
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="pagination_wrap">
-                                    <ul>
-                                        {%if jobs.has_previous%}
-                                            <li><a href="?page={{jobs.previous_page_number }}"> <i class="ti-angle-left"></i> </a></li>
-                                        {%endif%}
-
-                                         {%for i in jobs.paginator.page_range%}   
-                                            <li><a href="?page={{i}}"><span>{{i}}</span></a></li>
-                                        {%endfor%}
-
-                                        {%if jobs.has_next%}   
-                                            <li><a href="?page={{jobs.next_page_number }}"> <i class="ti-angle-right"></i> </a></li>
-                                        {%endif%}
-                                    </ul>
-                                </div>
+                    </div>
+                    {% endfor %}
+                    {% if jobs.has_other_pages %}
+                    <div class="row mt-4">
+                        <div class="col-lg-12">
+                            <div class="pagination_wrap text-center">
+                                <ul class="pagination justify-content-center">
+                                    {% if jobs.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ jobs.previous_page_number }}">
+                                            <i class="ti-angle-left"></i>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% for i in jobs.paginator.page_range %}
+                                    <li class="page-item {% if jobs.number == i %}active{% endif %}">
+                                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                    </li>
+                                    {% endfor %}
+                                    {% if jobs.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ jobs.next_page_number }}">
+                                            <i class="ti-angle-right"></i>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
                             </div>
                         </div>
-                        {%endif%}
                     </div>
-                    {%endfor%}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -179,5 +124,6 @@
     <!-- job_listing_area_end  -->
 
 </body>
+
 </html>
 {%endblock body%}

@@ -3,7 +3,7 @@ from .models import Job , Apply , Category
 from django.core.paginator import Paginator
 from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
-
+from .filter import JobFilter
 
 
 # Create your views here.
@@ -11,12 +11,16 @@ from django.contrib.auth.decorators import login_required
 def job_list(request):
     job_list = Job.objects.all()
 
+    #filters
+    filters = JobFilter(request.GET , queryset=job_list)
+    job_list = filters.qs
+
     paginator = Paginator(job_list, 3)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    context = {'jobs' : page_obj }
+    context = {'jobs' : page_obj  , 'myfilter':filters}
     return render(request , 'job/joblist.html' , context= context)
-
+@login_required
 def job_detial(request , slug):
     job = Job.objects.get(slug = slug)
 
