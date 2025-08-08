@@ -4,6 +4,8 @@ Django==5.2.4
 django-bootstrap4==25.2
 django-filter==25.1
 git-filter-repo==2.47.0
+gunicorn==23.0.0
+packaging==25.0
 pillow==11.3.0
 python-decouple==3.8
 soupsieve==2.7
