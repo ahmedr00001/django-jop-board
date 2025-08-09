@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-jop-board.onrender.com']
+ALLOWED_HOSTS = ['django-jop-board.onrender.com' , 'localhost']
 
 
 # Application definition

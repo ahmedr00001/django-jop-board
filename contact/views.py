@@ -20,6 +20,13 @@ def send_message(request):
         subject,
         message,
         "ahmed.h.ramadan.cs@gmail.com",
+        ["ahmed.h.ramadan.cs@gmail.com"],
+        fail_silently=False,
+        )
+        send_mail(
+        'We recieved your message',
+        message,
+        "ahmed.h.ramadan.cs@gmail.com",
         [email],
         fail_silently=False,
         )
