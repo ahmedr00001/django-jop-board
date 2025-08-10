@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
 from .filter import JobFilter
+from .form import CategoryForm
 
 
 # Create your views here.
@@ -76,3 +77,17 @@ def add_job (request):
 
     context = {'job_type' : job_type}
     return render(request , 'job/add_Job.html' , context)
+
+
+def add_category(request):
+    if request.method == "POST":
+        category_form = CategoryForm(request.POST)
+        if category_form.is_valid():
+            category_form.save()
+            return redirect ('job:add_job')
+
+
+    else:
+        category_form = CategoryForm()
+
+    return render(request , 'job/add_category.html', {'category_form':category_form})
