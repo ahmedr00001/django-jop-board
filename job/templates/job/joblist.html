@@ -42,6 +42,9 @@
                             <div class="row align-items-center">
                                 <div class="col-md-6">
                                     <h4>Job Listing</h4>
+                                    {% if request.GET.title %}
+                                    <p class="text-muted">Search results for: "{{ request.GET.title }}"</p>
+                                    {% endif %}
                                 </div>
                                 <div class="col-md-6">
 
@@ -59,7 +62,7 @@
                                             <!-- <img src="{{job.image.url}}" alt=""> -->
                                         </div>
                                         <div class="jobs_conetent">
-                                            <a href="{% url 'jobs:job_detial' job.slug %}">
+                                            <a href="{% url 'job:job_detial' job.slug %}">
                                                 <h4>{{job.title}}</h4>
                                             </a>
                                             <!-- we write url as url then main url : app url then pass any parameter -->
@@ -76,7 +79,7 @@
                                     <div class="jobs_right">
                                         <div class="apply_now">
                                             <a class="heart_mark" href="#"> <i class="fa fa-heart"></i> </a>
-                                            <a href="{% url 'jobs:job_detial' job.slug %}" class="boxed-btn3">Apply
+                                            <a href="{% url 'job:job_detial' job.slug %}" class="boxed-btn3">Apply
                                                 Now</a>
                                         </div>
                                         <div class="date">
@@ -95,19 +98,23 @@
                                 <ul class="pagination justify-content-center">
                                     {% if jobs.has_previous %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{ jobs.previous_page_number }}">
+                                        <a class="page-link"
+                                            href="?page={{ jobs.previous_page_number }}{% if request.GET.title %}&title={{ request.GET.title }}{% endif %}{% if request.GET.jop_type %}&jop_type={{ request.GET.jop_type }}{% endif %}{% if request.GET.description %}&description={{ request.GET.description }}{% endif %}{% if request.GET.experience %}&experience={{ request.GET.experience }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
                                             <i class="ti-angle-left"></i>
                                         </a>
                                     </li>
                                     {% endif %}
                                     {% for i in jobs.paginator.page_range %}
                                     <li class="page-item {% if jobs.number == i %}active{% endif %}">
-                                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                                        <a class="page-link"
+                                            href="?page={{ i }}{% if request.GET.title %}&title={{ request.GET.title }}{% endif %}{% if request.GET.jop_type %}&jop_type={{ request.GET.jop_type }}{% endif %}{% if request.GET.description %}&description={{ request.GET.description }}{% endif %}{% if request.GET.experience %}&experience={{ request.GET.experience }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">{{
+                                            i }}</a>
                                     </li>
                                     {% endfor %}
                                     {% if jobs.has_next %}
                                     <li class="page-item">
-                                        <a class="page-link" href="?page={{ jobs.next_page_number }}">
+                                        <a class="page-link"
+                                            href="?page={{ jobs.next_page_number }}{% if request.GET.title %}&title={{ request.GET.title }}{% endif %}{% if request.GET.jop_type %}&jop_type={{ request.GET.jop_type }}{% endif %}{% if request.GET.description %}&description={{ request.GET.description }}{% endif %}{% if request.GET.experience %}&experience={{ request.GET.experience }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
                                             <i class="ti-angle-right"></i>
                                         </a>
                                     </li>

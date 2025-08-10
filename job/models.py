@@ -4,8 +4,8 @@ from django.utils.text import slugify
 
 
 JOB_TYPE_CHOICES = (
-    ('ft', 'Full Time'),
-    ('pt', 'Part Time'),
+    ('Full Time', 'Full Time'),
+    ('Full Time', 'Part Time'),
 )
 
 

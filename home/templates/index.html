@@ -26,7 +26,7 @@
                                 instant cash loans with quick approval that suit your term length</p>
                             <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
                                 {%if request.user.is_authenticated%}
-                                <div class="phone_num d-none d-xl-block ">
+                                <div class="phone_num d-block">
                                     <p>You are currently logged in as {{request.user}}</p>
                                     <form action="{% url 'logout' %}" method="post">
                                         {% csrf_token %}
@@ -34,7 +34,7 @@
                                     </form>
                                 </div>
                                 {%else%}
-                                <div class="phone_num d-none d-xl-block">
+                                <div class="phone_num d-block">
                                     <a href="{%url 'login'%}" class="boxed-btn3">login</a>
                                     <a href="{% url 'accounts:signup' %}" class="boxed-btn3"
                                         style="margin-left:10px;">sign up</a>
@@ -58,35 +58,18 @@
     <div class="catagory_area">
         <div class="container">
             <div class="row cat_search">
-                <div class="col-lg-3 col-md-4">
-                    <div class="single_input">
-                        <input type="text" placeholder="Search keyword">
-                    </div>
+                <div class="col-lg-8 col-md-8">
+                    <form method="GET" action="{% url 'job:job_list' %}">
+                        <div class="single_input">
+                            <input type="text" name="title" placeholder="Search by job title"
+                                value="{{ request.GET.title }}">
+                        </div>
                 </div>
-                <div class="col-lg-3 col-md-4">
-                    <div class="single_input">
-                        <select class="wide">
-                            <option data-display="Location">Location</option>
-                            <option value="1">Dhaka</option>
-                            <option value="2">Rangpur</option>
-                            <option value="4">Sylet</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <div class="single_input">
-                        <select class="wide">
-                            <option data-display="Category">Category</option>
-                            <option value="1">Category 1</option>
-                            <option value="2">Category 2</option>
-                            <option value="4">Category 3</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-12">
+                <div class="col-lg-4 col-md-4">
                     <div class="job_btn">
-                        <a href="#" class="boxed-btn3">Find Job</a>
+                        <button type="submit" class="boxed-btn3">Find Job</button>
                     </div>
+                    </form>
                 </div>
             </div>
 
